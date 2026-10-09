@@ -4,12 +4,15 @@ import sequelize from './config/database';
 
 import './models';
 
+import { startReminderJob } from './jobs/reminder.job';
+
 const startServer = async () => {
     try{
         await sequelize.authenticate();
         console.log("Databse connected successfully");
         await sequelize.sync();
         console.log("Databse synchronized successfully");
+        startReminderJob();
         app.listen(env.port, () => {
             console.log(`Joblyst API is running on port ${env.port}`);
         })

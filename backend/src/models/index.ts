@@ -103,6 +103,18 @@ Attachment.belongsTo(Application, {
   as: "application",
 });
 
+// User -> Reminders
+User.hasMany(Reminder, {
+  foreignKey: "userId",
+  as: "reminders",
+  onDelete: "CASCADE",
+});
+
+Reminder.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user",
+});
+
 // Application -> Reminders
 Application.hasMany(Reminder, {
   foreignKey: "applicationId",
